@@ -1,5 +1,5 @@
 name 'Flameeyes-sysctl'
-version '0.0.1'
+version '0.0.2'
 author 'Diego Elio Petteno` <flameeyes@flameeyes.eu>'
 license 'Apache License, Version 2.0'
 summary 'Cross-distributions sysctl handling'
