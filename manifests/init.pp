@@ -1,7 +1,7 @@
 class sysctl($exclusive = true) {
   if $exclusive {
     file { ['/run/sysctl.d', '/etc/sysctl.d', '/usr/local/lib/sysctl.d', '/usr/lib/sysctl.d', '/lib/sysctl.d']:
-      ensure => absent,
+      ensure => directory,
       recurse => true,
       purge => true
     }
