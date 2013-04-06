@@ -1,4 +1,4 @@
-class sysctl($exclusive = true) {
+class sysctl($exclusive = false) {
   if $exclusive {
     file { ['/run/sysctl.d', '/etc/sysctl.d', '/usr/local/lib/sysctl.d', '/usr/lib/sysctl.d', '/lib/sysctl.d']:
       ensure  => directory,
