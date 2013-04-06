@@ -26,6 +26,22 @@ class sysctl($exclusive = true) {
         refreshonly => true,
       }
     }
+    'Debian' : {
+      case $::operatingsystem {
+        'Ubuntu': {
+          package { ['procps', 'upstart']:
+            ensure => installed,
+          }
+
+          service { 'procps':
+            ensure    => running,
+            enable    => true,
+            require   => [Package['procps', 'upstart']],
+            subscribe => File['/etc/sysctl.conf'],
+          }
+        }
+      }
+    }
     default: {
       case $::operatingsystem {
         'Gentoo': {
