@@ -1,18 +1,18 @@
 class sysctl($exclusive = true) {
   if $exclusive {
     file { ['/run/sysctl.d', '/etc/sysctl.d', '/usr/local/lib/sysctl.d', '/usr/lib/sysctl.d', '/lib/sysctl.d']:
-      ensure => directory,
+      ensure  => directory,
       recurse => true,
-      purge => true
+      purge   => true
     }
   }
 
   concat { '/etc/sysctl.conf': }
 
   concat::fragment { 'sysctl_header':
-    target => '/etc/sysctl.conf',
+    target  => '/etc/sysctl.conf',
     content => "# Managed by Puppet\n\n",
-    order => 01
+    order   => 01
   }
 
   case $::osfamily {
@@ -22,7 +22,7 @@ class sysctl($exclusive = true) {
       }
 
       exec { 'sysctl -p':
-        subscribe => File['/etc/sysctl.conf'],
+        subscribe   => File['/etc/sysctl.conf'],
         refreshonly => true,
       }
     }
@@ -50,9 +50,9 @@ class sysctl($exclusive = true) {
           }
 
           service { 'sysctl':
-            ensure => running,
-            enable => true,
-            require => [Package['sys-process/procps', 'sys-apps/openrc']],
+            ensure    => running,
+            enable    => true,
+            require   => [Package['sys-process/procps', 'sys-apps/openrc']],
             subscribe => File['/etc/sysctl.conf'],
           }
         }
