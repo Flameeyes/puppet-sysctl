@@ -1,6 +1,12 @@
 Sysctl variables handling for Puppet
 ========================================================
 
+This module is a fork of "Flameeyes/sysctl" and should only be used
+as long as the pull-requests (e.g. for Ubuntu support) haven't been
+applied yet.
+
+The goal of this module is: to be obsolete as soon as possible :)
+
 Overview
 --------
 
