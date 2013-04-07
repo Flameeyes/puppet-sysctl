@@ -23,3 +23,7 @@ the `exclusive` class parameter:
 
     class {"sysctl": exclusive => true }
     sysctl::value { "net.ipv4.conf.all.accept_redirects": content => "0" }
+
+This will unset all custom sysctl variables set by the user/distribution
+first and only those defined through Puppet will remain to be actually
+applied.
