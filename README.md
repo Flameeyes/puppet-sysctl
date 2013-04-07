@@ -21,5 +21,9 @@ If you want to manage your sysctl settings exclusively through Puppet, you
 need to declare the class instead of using the `include` shortcut to set
 the `exclusive` class parameter:
 
-    class {'sysctl': exclusive => true }
+    class {"sysctl": exclusive => true }
     sysctl::value { "net.ipv4.conf.all.accept_redirects": content => "0" }
+
+This will unset all custom sysctl variables set by the user/distribution
+first and only those defined through Puppet will remain to be actually
+applied.
