@@ -21,7 +21,7 @@ class sysctl($exclusive = false) {
         ensure => installed,
       }
 
-      exec { 'sysctl -p':
+      exec { '/sbin/sysctl -p':
         subscribe   => File['/etc/sysctl.conf'],
         refreshonly => true,
       }
