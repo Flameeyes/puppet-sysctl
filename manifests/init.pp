@@ -17,9 +17,7 @@ class sysctl($exclusive = false) {
 
   case $::osfamily {
     'RedHat': {
-      package { 'procps':
-        ensure => installed,
-      }
+      $packages = 'procps'
 
       exec { '/sbin/sysctl -p':
         subscribe   => File['/etc/sysctl.conf'],
@@ -29,9 +27,7 @@ class sysctl($exclusive = false) {
     'Debian' : {
       case $::operatingsystem {
         'Ubuntu': {
-          package { ['procps', 'upstart']:
-            ensure => installed,
-          }
+          $packages = ['procps', 'upstart']
 
           service { 'procps':
             ensure    => running,
@@ -41,9 +37,7 @@ class sysctl($exclusive = false) {
           }
         }
         'Debian': {
-          package { 'procps':
-            ensure => installed,
-          }
+          $packages = 'procps'
 
           service { 'procps':
             ensure    => running,
@@ -57,9 +51,7 @@ class sysctl($exclusive = false) {
     default: {
       case $::operatingsystem {
         'Gentoo': {
-          package { ['sys-process/procps', 'sys-apps/openrc']:
-            ensure => installed,
-          }
+          $packages = ['sys-process/procps', 'sys-apps/openrc']
 
           service { 'sysctl':
             ensure    => running,
@@ -70,5 +62,9 @@ class sysctl($exclusive = false) {
         }
       }
     }
+  }
+
+  package { $packages:
+    ensure => installed,
   }
 }
