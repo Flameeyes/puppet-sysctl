@@ -19,7 +19,7 @@ class sysctl($exclusive = false) {
     'RedHat': {
       $packages = 'procps'
 
-      exec { 'sysctl -p':
+      exec { '/sbin/sysctl -p':
         subscribe   => File['/etc/sysctl.conf'],
         refreshonly => true,
       }
