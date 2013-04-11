@@ -40,6 +40,18 @@ class sysctl($exclusive = false) {
             subscribe => File['/etc/sysctl.conf'],
           }
         }
+        'Debian': {
+          package { 'procps':
+            ensure => installed,
+          }
+
+          service { 'procps':
+            ensure    => running,
+            enable    => true,
+            require   => Package['procps'],
+            subscribe => File['/etc/sysctl.conf'],
+          }
+        }
       }
     }
     default: {
