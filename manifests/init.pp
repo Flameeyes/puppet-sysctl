@@ -33,11 +33,10 @@ class sysctl($exclusive = false) {
             ensure => installed,
           }
 
-          service { 'procps':
-            ensure    => running,
-            enable    => true,
-            require   => [Package['procps', 'upstart']],
-            subscribe => File['/etc/sysctl.conf'],
+          exec { 'procps':
+            command     => '/sbin/start procps',
+            subscribe   => File['/etc/sysctl.conf'],
+            refreshonly => true,
           }
         }
         'Debian': {
